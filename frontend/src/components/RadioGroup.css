@@ -1,0 +1,18 @@
+.custom-radio-group {
+  display: flex;
+  gap: 1rem;
+}
+.custom-radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+.custom-radio {
+  accent-color: #2563eb;
+  width: 18px;
+  height: 18px;
+}
+.custom-radio-text {
+  font-size: 1rem;
+}
