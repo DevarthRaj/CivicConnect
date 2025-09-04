@@ -1,0 +1,141 @@
+ABSTRACT
+
+CivicConnect is a web-based platform designed to streamline and enhance grievance redressal in public service delivery.
+It empowers citizens to lodge complaints related to civic issues such as road maintenance, streetlights, water supply,
+and more,ensuring a transparent and accountable resolution process.
+The platform supports a structured complaint lifecycle—from submission to resolution—enabling efficient tracking and management. 
+CivicConnect features role-based access for three user types: 
+Citizens, who can file, monitor, and provide feedback on complaints; Department Officers, who update and manage complaint progress; and Administrators, who oversee operations, assign tasks, manage categories, and generate reports. 
+This layered access ensures that responsibilities are clearly defined and efficiently executed. 
+The backend uses a relational database to manage data across multiple interconnected tables, including users, departments, complaints, feedback, and categories. 
+This structure ensures data consistency, integrity, and traceability, making it easier to monitor complaint histories and service performance.
+By integrating registration, assignment, monitoring, and feedback into one system, CivicConnect showcases the real-world utility of Database Management Systems (DBMS) in governance.
+It not only improves service efficiency but also fosters citizen trust by offering visibility into how their grievances are being handled.
+
+
+TABLES
+
+🔹 1. users
+
+Stores all types of system users (citizens, officers, admins).
+
+Columns:
+
+user_id (PK)
+
+name
+
+email
+
+phone
+
+password_hash
+
+role (citizen / officer / admin)
+
+created_at
+
+🔹 2. citizens
+
+Stores citizen-specific details, separate from general users.
+
+Linked to users via user_id.
+
+Columns:
+
+citizen_id (PK)
+
+user_id (FK → users.user_id)
+
+address
+
+city
+
+pincode
+
+🔹 3. departments
+
+Represents government service divisions (Water, Roads, Streetlights, etc.).
+
+Columns:
+
+department_id (PK)
+
+department_name
+
+description
+
+🔹 4. categories
+
+Complaint types (each linked to a department).
+
+Columns:
+
+category_id (PK)
+
+department_id (FK → departments.department_id)
+
+category_name
+
+description
+
+🔹 5. complaints
+
+Central table for all lodged grievances.
+
+Columns:
+
+complaint_id (PK)
+
+citizen_id (FK → citizens.citizen_id)
+
+category_id (FK → categories.category_id)
+
+title
+
+description
+
+location
+
+photo_url (optional)
+
+status (Pending / In Progress / Resolved / Rejected)
+
+priority (Low / Medium / High)
+
+created_at, updated_at
+
+🔹 6. feedback
+
+Citizens provide feedback on resolved complaints.
+
+Columns:
+
+feedback_id (PK)
+
+complaint_id (FK → complaints.complaint_id)
+
+citizen_id (FK → citizens.citizen_id)
+
+rating (1–5 or Satisfied/Not Satisfied)
+
+comments
+
+created_at
+
+
+RELATIONS
+
+users ↔ citizens: One user can be a citizen (1-to-1).
+
+departments ↔ categories: One department can have many categories (1-to-many).
+
+citizens ↔ complaints: One citizen can file many complaints (1-to-many).
+
+categories ↔ complaints: Each complaint belongs to one category (many-to-1).
+
+complaints ↔ feedback: One complaint can have one feedback entry (1-to-1).
+
+
+FOLDER STRUCTURE(PLEASE UPDATE THIS IF YOU MADE ANY MODIFICATIONS)
+
